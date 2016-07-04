@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>cUSTOM AND ADVANCE DIRECTIVES 2</title>
+	
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script type="text/javascript">
+		var mod=angular.module("myapp",[]);
+		mod.controller("con",function($scope){
+			$scope.f = function(){
+				alert('ASSIGNMENT OF CUSTOM AND ADVANCE DIRECTIVE');
+			}
+		})
+		mod.directive("ngDir1",function(){   // Element Directive
+			return {
+				template : ' <button type="button" class="btn btn-primary" ng-click="action()"> Element </button>  ',
+				restrict : 'E',
+				replace : 'true',
+				scope : { action:'&' }
+			}
+		});
+		mod.directive("ngDir2",function(){	// Class Directive
+			return {
+				template : '<button type="button" class="btn btn-primary" ng-click="action()">Class </button>',
+				restrict : 'C',
+				replace : 'false',
+				scope : { action:'&' }
+			}
+		});
+		
+		mod.directive("ngDir3",function(){   // Attribute Directive 
+			return {
+				template : ' <button type="button" class="btn btn-primary" ng-click="action()"> Attribute </button> ',
+				restrict : 'A',
+				replace : 'false',
+				scope : { action:'&' }
+			}
+		});
+		mod.directive("ngDir4",function(){   // Comment Directive
+			return { 
+				template : '<p> Comment directive </p>',
+				restrict : 'M',
+				replace : 'false',
+				scope : { action:'&' }
+			}
+		});
+		
+	</script>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="con">
+		<ng-dir1 action="f()"> </ng-dir1> <br> <br>
+		<div class="ng-dir2" action="f()"> </div> <br> <br>
+		<div ng-dir3 action="f()"> </div> <br> <br>
+		<!-- directive: ng-dir4 -->
+	</div>
+
+</body>
+</html>
